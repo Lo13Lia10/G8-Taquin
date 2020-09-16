@@ -40,7 +40,7 @@ public class Taquinerie extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    coucou
+    coucoue
     /**
      * @param args the command line arguments
      */
