@@ -40,7 +40,9 @@ public class Taquinerie extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    coucoue
+    public void Hazal(){
+        
+    }
     /**
      * @param args the command line arguments
      */
