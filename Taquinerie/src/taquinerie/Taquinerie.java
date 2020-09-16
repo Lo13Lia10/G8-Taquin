@@ -48,6 +48,7 @@ public class Taquinerie extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        /*La purée c'est pour Dylan le Prez --- Lo*/
     }
     
 }
