@@ -10,5 +10,11 @@ package g8taquin;
  * @author nci
  */
 public class Grille {
-    
+     public Grille(){
+        
+    }
+    public boolean verifDeplacement(){
+        return false; 
+             
+    }
 }
