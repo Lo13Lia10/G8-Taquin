@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class Joueur {
     private String pseudo="";  // represente le pseudo du joueur 
-    
+    private int deplacement; 
      public void setPseudo(){
   //jai repris notre ancienne fonction chez sahzamm 
         Scanner sc = new Scanner(System.in);  //Initialisation du scanner
@@ -30,4 +30,16 @@ public class Joueur {
          //getteur du pseudo 
      return pseudo;   
 } 
+       
+     public int getDeplacement(){
+         // retourne ne le nombre de deplacement 
+         return deplacement; 
+     }
+     public void setPseudo(String ps){
+            this.pseudo=ps;  
+         }
+     public void setDeplacement (){
+         //permet d'incrementer +1
+         this.deplacement= deplacement+1; 
+     }
 }
