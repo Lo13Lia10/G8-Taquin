@@ -31,14 +31,14 @@ public class Joueur {
      return pseudo;   
 } 
        
-     public int getDeplacement(){
+     public int getNbDeplacement(){
          // retourne ne le nombre de deplacement 
          return deplacement; 
      }
      public void setPseudo(String ps){
             this.pseudo=ps;  
          }
-     public void setDeplacement (){
+     public void setNbDeplacement (){
          //permet d'incrementer +1
          this.deplacement= deplacement+1; 
      }
