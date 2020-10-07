@@ -11,36 +11,61 @@ package g8taquin;
  */
 public class Case {
     
-   private  int x; 
-   private int y; 
-    public Case(int abs, int ord){
+    private int x; 
+    private int y;
+    private boolean vide;
+    private Bloc b;
+    
     //consctructeur de la classe 
-    //crée un carte qui pour coordonees abs et ord  
+    //crée un carte qui pour coordonees abs et ord
+    public Case(int abs, int ord){
         this.x=abs; 
         this.y=ord; 
+        this.vide=true;
     }
-   public int getCoordx(){
-       //renvoie l'attribut coordx
+
+    //renvoie l'attribut x 
+    public int getCoordx(){    
        return this.x; 
     }
-   public int getCoordy(){
-         //renvoie l'attribut coordy
+    
+    //renvoie l'attribut y
+    public int getCoordy(){    
        return this.y; 
     }
-   public boolean getVide(){
-        return false; 
+    
+    //retourne la valuer d'une case
+    public boolean isVide(){
+        return this.vide; 
     }
-    public void setCoordx (int x){
-        //si le mouvement est vertical change la coordx pour x 
-        this.x=x; 
+    
+    //modifie le x par la valeur newx 
+    public void setCoordx (int newx){
+        this.x=newx; 
     }
-    public void setCoordy(int y){
-        //si le mouvement est horizontal change la coordy pour y 
-        this.y=y; 
+    
+    //modifie le y par la valeur newy 
+    public void setCoordy(int newy){
+        this.y=newy; 
     }
+    
+    /*
+    methode qui modifie l'attribut vide avec la valeur v en parametre
+    */
     public void setVide(boolean v){
-        
+        this.vide=v;
     }
+
+    @Override
+    public String toString() {
+        if (this.isVide()){
+            return "[ ]";
+        }
+        else{
+        return "["+ this.b.getNumBloc +']';
+        }
+    }
+    
     
     
 }
