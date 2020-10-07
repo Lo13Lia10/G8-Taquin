@@ -10,11 +10,12 @@ package g8taquin;
  * @author nci
  */
 public class Case {
-    //consctructeur de la classe 
-    //crée un carte qui pour coordonees x y 
-    int x; 
-    int y; 
+    
+   private  int x; 
+   private int y; 
     public Case(int abs, int ord){
+    //consctructeur de la classe 
+    //crée un carte qui pour coordonees abs et ord  
         this.x=abs; 
         this.y=ord; 
     }

@@ -17,4 +17,13 @@ public class Grille {
         return false; 
              
     }
+    public void inversionCoord(){
+        
+    }
+    public int deplacement (int x){
+        //cette methode appelle verif deplacement et inversioncoord 
+        verifDeplacement (); 
+        inversionCoord(); 
+        return x; 
+    }
 }

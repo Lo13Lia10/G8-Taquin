@@ -11,9 +11,9 @@ package g8taquin;
  */
 public class Bloc {
    
-    int x; 
-    int y; 
-    int n; 
+    private int x; 
+    private int y; 
+    private int n; 
     public Bloc (int x, int num,int y ){
     //constructeur de la classe 
         this.x=x; 

@@ -13,9 +13,10 @@ import java.util.Scanner;
  */
 public class Joueur {
     private String pseudo="";  // represente le pseudo du joueur 
-    private int deplacement; 
+    private int deplacement; // le nombre de deplacement 
+    private int score; //le score 
      public void setPseudo(){
-  //jai repris notre ancienne fonction chez sahzamm 
+  //jai repris notre ancienne méthode chez sahzamm 
         Scanner sc = new Scanner(System.in);  //Initialisation du scanner
         System.out.println("\nNouveau Joueur, entre ton pseudo : "); 
         String ps = sc.nextLine();   //Saisie par le joueur
@@ -42,4 +43,10 @@ public class Joueur {
          //permet d'incrementer +1
          this.deplacement= deplacement+1; 
      }
+     public void creationProfil(){
+         //mise a jour du profil et appelle saisie pseudo 
+     }
+     /*public void setScore(){
+        this.score=score+1; 
+     }*/
 }
