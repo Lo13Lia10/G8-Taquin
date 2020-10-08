@@ -62,7 +62,7 @@ public class Case {
             return "[ ]";
         }
         else{
-        return "["+ this.b.getNumBloc +']';
+        return "["+ this.b.getNumBloc() +']';
         }
     }
     
