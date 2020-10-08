@@ -35,7 +35,7 @@ public class Case {
     }
     
     //retourne la valuer d'une case
-    public boolean isVide(){
+    public boolean getVide(){
         return this.vide; 
     }
     
@@ -58,7 +58,7 @@ public class Case {
 
     @Override
     public String toString() {
-        if (this.isVide()){
+        if (this.getVide()){
             return "[ ]";
         }
         else{
