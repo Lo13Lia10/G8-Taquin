@@ -178,6 +178,7 @@ public class Grille {
         }
         //Retourne le numéro du bloc
         return numbloc;
+        //pomme 
     }
     
     /*
