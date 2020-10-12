@@ -10,7 +10,7 @@ package g8taquin;
  * @author nci
  */
 public class Case {
-    et vlaaaaaaaaaaaaa
+  
     private int x; 
     private int y;
     private boolean vide;
