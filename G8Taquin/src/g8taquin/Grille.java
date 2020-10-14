@@ -14,32 +14,39 @@ import java.util.Iterator;
  */
 public class Grille {
     //Attributs
-    int taille = 0 ;
-    Case [][] ensCase = new Case[taille][taille];
-    HashSet ensNumBloc = remplissageNumBloc(); //
+    int taille=0;
+    Case [][] ensCase;
+    HashSet<Integer> ensNumBloc;
     
     //Constructeur
     public Grille(int t){
         /*
         constructeur de case : coords, num du bloc, booleen en bas à droite
-        */
-        
+        */        
         this.taille = t;
+        this.ensCase = new Case[taille][taille];
+        this.ensNumBloc=remplissageNumBloc();
         //Création du tableau de Cases
-        for (int i=0 ; i==taille-1 ; i++){
-            for (int j=0 ; j==taille-1 ; j++){
+        
+        for (int i=0 ; i<this.taille ; i++){
+            
+            for (int j=0 ; j<this.taille ; j++){
                 //Initialisation du booléen vide pour mettre à vide la case en bas à droite du puzzle
                 boolean vide = false;
-                if (i==taille-1 && j==taille-1){
+                if (i==this.taille-1 && j==this.taille-1){
                     vide = true;
                 }
                 //Tirage au sort du num du bloc
                 Iterator it = ensNumBloc.iterator();
-                while (it.hasNext()){
-                    //Copie du numéro courant
+               
+                while (  it.hasNext()){
+                    //Copie du numéro courant                    
                     int num = (int) it.next();
+                    System.out.println(num);
                     //Création de la case
                     ensCase[i][j] = new Case (i, j, vide, num);
+                    this.ensNumBloc.remove( num);
+                    
                 }
             }
         }
@@ -62,8 +69,8 @@ public class Grille {
     */
     private HashSet remplissageNumBloc() {
         HashSet numBloc = new HashSet();
-        for (int i=0 ; i==taille-1; i++){
-            int num = taille - 1 - i;
+        for (int i=0 ; i<this.taille*taille; i++){
+            int num = this.taille*taille - i;
             numBloc.add(num);
         }
         return numBloc;
@@ -240,12 +247,18 @@ public class Grille {
     public String toString () {
         String grilleString = "";
         //Parcours de l'ensemble de cases
-        for (int i=0 ; i==taille-1 ; i++){
-            for (int j=0 ; j==taille-1 ; j++){
+        for (int i=0 ; i<this.taille ; i++){            
+            for (int j=0 ; j<this.taille ; j++){
                 grilleString = grilleString + " " + ensCase[i][j].toString();
             }
             grilleString = grilleString + "\n";
         }
         return grilleString;
+    }
+    
+    public static void main(String[] args) {
+        Grille g = new Grille(3);        
+        System.out.println(g);
+        
     }
 }

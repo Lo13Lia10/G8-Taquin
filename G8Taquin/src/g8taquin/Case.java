@@ -21,7 +21,7 @@ public class Case {
     public Case(int abs, int ord, boolean v, int num){
         this.x=abs; 
         this.y=ord; 
-        this.vide=true;
+        this.vide=v;
         Bloc bloc =new Bloc(this.x,this.y,num);
         this.b=bloc;
     }
