@@ -64,9 +64,6 @@ public class Case {
         else{
         return "["+ this.b.getNumBloc() +']';
         }
-    }
-    
-    
-    
+    }  
 }
 
