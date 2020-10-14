@@ -39,7 +39,7 @@ public class Grille {
                     //Copie du numéro courant
                     int num = (int) it.next();
                     //Création de la case
-                    //ensCase[i][j] = new Case (i, j, vide, num);
+                    ensCase[i][j] = new Case (i, j, vide, num);
                 }
             }
         }

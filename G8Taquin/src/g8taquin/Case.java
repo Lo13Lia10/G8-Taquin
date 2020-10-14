@@ -18,10 +18,12 @@ public class Case {
     
     //consctructeur de la classe 
     //crée un carte qui pour coordonees abs et ord
-    public Case(int abs, int ord){
+    public Case(int abs, int ord, boolean v, int num){
         this.x=abs; 
         this.y=ord; 
         this.vide=true;
+        Bloc bloc =new Bloc(this.x,this.y,num);
+        this.b=bloc;
     }
 
     //renvoie l'attribut x 
@@ -55,6 +57,12 @@ public class Case {
     public void setVide(boolean v){
         this.vide=v;
     }
+    
+    public Bloc getBloc(){
+        return this.b;
+    }
+    
+  
 
     @Override
     public String toString() {
@@ -62,7 +70,7 @@ public class Case {
             return "[ ]";
         }
         else{
-        return "["+ this.b.getNumBloc() +']';
+        return "["+ this.getBloc().getNumBloc() +']';
         }
     }  
 }
