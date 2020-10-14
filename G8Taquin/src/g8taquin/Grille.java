@@ -16,11 +16,33 @@ public class Grille {
     //Attributs
     int taille = 0 ;
     Case [][] ensCase = new Case[taille][taille];
-    HashSet ensBloc = new HashSet();
+    HashSet ensNumBloc = remplissageNumBloc(); //
     
     //Constructeur
-    public Grille(){
+    public Grille(int t){
+        /*
+        constructeur de case : coords, num du bloc, booleen en bas à droite
+        */
         
+        this.taille = t;
+        //Création du tableau de Cases
+        for (int i=0 ; i==taille-1 ; i++){
+            for (int j=0 ; j==taille-1 ; j++){
+                //Initialisation du booléen vide pour mettre à vide la case en bas à droite du puzzle
+                boolean vide = false;
+                if (i==taille-1 && j==taille-1){
+                    vide = true;
+                }
+                //Tirage au sort du num du bloc
+                Iterator it = ensNumBloc.iterator();
+                while (it.hasNext()){
+                    //Copie du numéro courant
+                    int num = (int) it.next();
+                    //Création de la case
+                    //ensCase[i][j] = new Case (i, j, vide, num);
+                }
+            }
+        }
     }
     
     public void setTaille (int newTaille) {
@@ -35,12 +57,27 @@ public class Grille {
         return this.taille;
     }
     
-    private void inversionCoord(int num_bloc1, int num_bloc2, char d){
+    /*
+    Remplissage de l'ensemble avec tous les numéros des blocs possibles
+    */
+    private HashSet remplissageNumBloc() {
+        HashSet numBloc = new HashSet();
+        for (int i=0 ; i==taille-1; i++){
+            int num = taille - 1 - i;
+            numBloc.add(num);
+        }
+        return numBloc;
+    }
+    
+    private void inversionCoord(int num_bloc_x, int num_bloc_y, Case caseVide, char d){
         //Récupérer les coordonnées des deux blocs dans des variables
         /*
         var tempx = coordx_num1
         var tempy = coordy_num1
+        */
         
+        
+        /*
         //Le bloc prend de nouvelles coordonnées
         //Déplacement vers la gauche
         if (d ='q') {
@@ -66,7 +103,7 @@ public class Grille {
         */
     }
     
-    protected int deplacement (char direction){
+    protected boolean deplacement (char direction){
     //permet le déplacement d'une case dans la direction souhaitée si c'est possible
         //Récupération des coordonnées de la case vide
         Case caseVide = trouveCaseVide();
@@ -74,45 +111,55 @@ public class Grille {
         int casevide_y = caseVide.getCoordy();
         
         //Initialisation du num_bloc
-        int num_bloc = 0;
+        int num_bloc_x = -1;    //Initialisation à une coordonnée impossible
+        int num_bloc_y = -1;    //Initialisation à une coordonnée impossible
+        
         //Initialisation du booléen pour savoir si on peut vérifier le déplacement
         boolean deplacement_ok = true;
         
         //Déplacement vers la gauche
         if (direction=='q' && casevide_y!=taille-1) {
             //le bloc prend y-1, x+0
-            this.getNumBlocByCoord(casevide_x, casevide_y-1);
+            //this.getNumBlocByCoord(casevide_x, casevide_y-1);
+            num_bloc_x = casevide_x;
+            num_bloc_y = casevide_y-1;
         }
         //Déplacement vers le bas
         else if (direction=='s' && casevide_x!=0) {
             //le bloc prend y+0, x+1
-            this.getNumBlocByCoord(casevide_x+1, casevide_y);
+            //this.getNumBlocByCoord(casevide_x+1, casevide_y);
+            num_bloc_x = casevide_x+1;
+            num_bloc_y = casevide_y;
         }
         //Déplacement vers la droite
         else if (direction=='d' && casevide_y!=0) {
             //le bloc prend y+1, x+0
-            this.getNumBlocByCoord(casevide_x, casevide_y+1);
+            //this.getNumBlocByCoord(casevide_x, casevide_y+1);
+            num_bloc_x = casevide_x;
+            num_bloc_y = casevide_y+1;
         }
         //Déplacement vers le haut
         else if (direction=='z' && casevide_x!=taille-1) {
             //le bloc prend y+0, x-1
-            this.getNumBlocByCoord(casevide_x-1, casevide_y);
+            //this.getNumBlocByCoord(casevide_x-1, casevide_y);
+            num_bloc_x = casevide_x-1;
+            num_bloc_y = casevide_y;
         }
         else {
             //le déplacement n'est pas possible
             deplacement_ok = false;
         }
         
-    
+        
         //Vérifie si le déplacement est possible
         if (deplacement_ok){
             //Si oui alors on inverse les coordonnées des cases adjacentes
             //9999 A REMPLACER PAR LE NUMERO DE LA CASE VIDE OU AUTRE JE SAIS PAS COMMENT ON DECIDE
-            inversionCoord(num_bloc, 999, direction); 
+            inversionCoord(num_bloc_x, num_bloc_y, caseVide, direction); 
             //On met la bonne case à VIDE
         }
         
-        return num_bloc; 
+        return deplacement_ok; 
     }
     
     private boolean verifVictoire () {
@@ -162,6 +209,7 @@ public class Grille {
     Parcours le HashSet de Bloc pour trouver le bloc qui a pour coord x et y et renvoie son numéro
     */
     private int getNumBlocByCoord(int x, int y) {
+        /*
         //Déclaration et Initialisation
         int numbloc = 0;
         //Copie du HashSet de Bloc
@@ -176,10 +224,14 @@ public class Grille {
                 numbloc = bloctemp.getNumBloc();
             }
         }
+        
         //Retourne le numéro du bloc
         return numbloc;
         //pomme 
+        */
+        return 0;
     }
+    
     
     /*
     Permet de retourner la grille en chaine de caractère
