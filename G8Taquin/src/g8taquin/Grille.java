@@ -15,8 +15,8 @@ import java.util.Iterator;
 public class Grille {
     //Attributs
     int taille=0;
-    Case [][] ensCase;
-    HashSet<Integer> ensNumBloc;
+    Case [][] ensCase;    
+    HashSet<Integer> ensNumBloc = new HashSet();
     
     //Constructeur
     public Grille(int t){
@@ -39,13 +39,16 @@ public class Grille {
                 //Tirage au sort du num du bloc
                 Iterator it = ensNumBloc.iterator();
                
-                while (  it.hasNext()){
+                while (it.hasNext()){
                     //Copie du numéro courant                    
                     int num = (int) it.next();
                     System.out.println(num);
                     //Création de la case
                     ensCase[i][j] = new Case (i, j, vide, num);
-                    this.ensNumBloc.remove( num);
+//                    if((int) it.next()==num){
+//                        this.ensNumBloc.remove(num);
+//                    }
+                    
                     
                 }
             }
@@ -68,7 +71,7 @@ public class Grille {
     Remplissage de l'ensemble avec tous les numéros des blocs possibles
     */
     private HashSet remplissageNumBloc() {
-        HashSet numBloc = new HashSet();
+        HashSet<Integer> numBloc = new HashSet();
         for (int i=0 ; i<this.taille*taille; i++){
             int num = this.taille*taille - i;
             numBloc.add(num);
