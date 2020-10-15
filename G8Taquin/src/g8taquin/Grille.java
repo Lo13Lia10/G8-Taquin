@@ -5,8 +5,10 @@
  */
 package g8taquin;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -16,7 +18,8 @@ public class Grille {
     //Attributs
     int taille=0;
     Case [][] ensCase;    
-    HashSet<Integer> ensNumBloc = new HashSet();
+//    HashSet<Integer> ensNumBloc = new HashSet();
+    List <Integer> listeBloc = new ArrayList<Integer>();
     
     //Constructeur
     public Grille(int t){
@@ -25,7 +28,10 @@ public class Grille {
         */        
         this.taille = t;
         this.ensCase = new Case[taille][taille];
-        this.ensNumBloc=remplissageNumBloc();
+        remplissageListeBloc(this.listeBloc);
+        System.out.println(this.listeBloc);
+        int num = 0;
+        
         //Création du tableau de Cases
         
         for (int i=0 ; i<this.taille ; i++){
@@ -34,28 +40,29 @@ public class Grille {
                 //Initialisation du booléen vide pour mettre à vide la case en bas à droite du puzzle
                 boolean vide = false;
                 if (i==this.taille-1 && j==this.taille-1){
-                    vide = true;
+                    vide = true;                    
                 }
-                //Tirage au sort du num du bloc
-                int cmpt = aleatoire(taille);
-                System.out.println("cmpt" + cmpt);
-                int num=1;
                 
-                for (int n = 0; n<cmpt;n++){
-                    Iterator it = ensNumBloc.iterator();                    
-                    num = (int) it.next();
-                    System.out.println("");
+                //Tirage au sort du num du bloc
+               
+                 
+                if(!listeBloc.isEmpty()){
+                     int cmpt = aleatoire(this.listeBloc.size());
+                      System.out.println("cmpt" + cmpt);
+                      
+                      num= this.listeBloc.get(cmpt);
+                      this.listeBloc.remove(cmpt);
+                      
                 }
-                this.ensNumBloc.remove(num);
-                System.out.println(num);
                 ensCase[i][j] = new Case (i, j, vide, num);
+                
             }
         }
     }
     
     public int aleatoire(int taille){
-        int max = (taille*taille)-1;
-        return (int)(Math.random() * (max-1)) + 1;
+        int max = taille-1;
+        return (int)(Math.random() * (max));
         
     }
     
@@ -74,13 +81,14 @@ public class Grille {
     /*
     Remplissage de l'ensemble avec tous les numéros des blocs possibles
     */
-    private HashSet remplissageNumBloc() {
-        HashSet<Integer> numBloc = new HashSet();
-        for (int i=0 ; i<this.taille*taille; i++){
-            int num = this.taille*taille - i;
-            numBloc.add(num);
+    private List remplissageListeBloc(List l) {
+        for (int i=0 ; i<this.taille*taille-1; i++){
+            int num = this.taille*taille-1 -i;
+            
+                l.add(num);
+
         }
-        return numBloc;
+        return l;
     }
     
     private void inversionCoord(int num_bloc_x, int num_bloc_y, Case caseVide, char d){
