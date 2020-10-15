@@ -49,11 +49,11 @@ public class Grille {
 //                        this.ensNumBloc.remove(num);
 //                    }
                     
-                    
                 }
             }
         }
     }
+    
     
     public void setTaille (int newTaille) {
     //Initialisation de l'attribut taille
@@ -80,39 +80,78 @@ public class Grille {
     }
     
     private void inversionCoord(int num_bloc_x, int num_bloc_y, Case caseVide, char d){
-        //Récupérer les coordonnées des deux blocs dans des variables
-        /*
-        var tempx = coordx_num1
-        var tempy = coordy_num1
-        */
+        //Récupérer les coordonnées du bloc et de la case vide  dans des variables
+        
+        int tempx = num_bloc_x; //du bloc qui va être déplacé 
+        int  tempy = num_bloc_y;   // du bloc qui va être déplacé 
+        int videx= caseVide.getCoordx(); 
+        int videy= caseVide.getCoordy(); 
+        
+        Case caseAdep = trouveCaseByCoord(num_bloc_x,num_bloc_y); 
         
         
-        /*
         //Le bloc prend de nouvelles coordonnées
         //Déplacement vers la gauche
-        if (d ='q') {
+        if (d =='q') {
+            caseAdep.setCoordx(videx);
+            caseAdep.setCoordy(videy); 
+            caseVide.setCoordx(num_bloc_x);
+            caseVide.setCoordy(num_bloc_y);
+         
             //le bloc prend coordy - 1, coordx inchangée
+        
         }
-        /Déplacement vers le bas
-        else if (d='s') {
+        //Déplacement vers le bas
+        else if (d=='s') {
+            caseAdep.setCoordx(videx);
+            caseAdep.setCoordy(videy); 
+            caseVide.setCoordx(num_bloc_x);
+            caseVide.setCoordy(num_bloc_y);
             
         }
         //Déplacement vers la droite
-        else if (d='d') {
+        else if (d=='d') {
+            caseAdep.setCoordx(videx);
+            caseAdep.setCoordy(videy); 
+            caseVide.setCoordx(num_bloc_x);
+            caseVide.setCoordy(num_bloc_y);
             
         }
         //Déplacement vers le haut
-        else if (d='z') {
+        else if (d=='z') {
+            caseAdep.setCoordx(videx);
+            caseAdep.setCoordy(videy); 
+            caseVide.setCoordx(num_bloc_x);
+            caseVide.setCoordy(num_bloc_y);
             
         }
         
-        //Nouvelle coordonnées pour la case vide
+        //On met la bonne case à VIDE
+        caseAdep.setVide(true); //elle est vide
+        caseVide.setVide(false); //elle n'est plus vide
+        
+        /*
         on prend la case avec les coordonnées initial du bloc qu'on a déplacé
         et à ses coordonnées on met le booléen VIDE = TRUE
         on met au nouvelle coordonnée du bloc déplacé VIDE = FALSE
         */
+        
     }
     
+    private Case trouveCaseByCoord(int x, int y ){
+        Case c = null;
+        //Parcours de l'ensemble des cases
+        for (int i=0 ; i==taille ; i++){
+            for (int j=0 ; j==taille ; j++){
+                //Si la case a les coord passé en paramètre 
+                if (this.ensCase[i][j].getCoordx()==x && this.ensCase[i][j].getCoordy()==y){
+                    c = this.ensCase[i][j];
+                }
+            }
+        }
+        //Renvoie la case cherchée
+        return c; 
+    }
     protected boolean deplacement (char direction){
     //permet le déplacement d'une case dans la direction souhaitée si c'est possible
         //Récupération des coordonnées de la case vide
@@ -164,9 +203,7 @@ public class Grille {
         //Vérifie si le déplacement est possible
         if (deplacement_ok){
             //Si oui alors on inverse les coordonnées des cases adjacentes
-            //9999 A REMPLACER PAR LE NUMERO DE LA CASE VIDE OU AUTRE JE SAIS PAS COMMENT ON DECIDE
             inversionCoord(num_bloc_x, num_bloc_y, caseVide, direction); 
-            //On met la bonne case à VIDE
         }
         
         return deplacement_ok; 
@@ -176,23 +213,28 @@ public class Grille {
         int temp_num_bloc = 0;  //variable temp pour le num du bloc précédent
         boolean ordonne = true; //TRUE si les blocs sont dans l'ordre
         
-        /*
-        temp_num_bloc prend les coordonnées de la cas 0;0
+        Case case_Vide= trouveCaseVide(); 
         
         while (ordonne) {
-            for (int i=1 ; i=taille ; i++) {
-                for (int j=0 ; j=taille ; j++) {
-                    num_bloc =  le numéro du bloc au coordonnée i;j
-                    if (num_bloc != temp_num_bloc+1){
+            for (int i=1 ; i<taille ; i++) {
+                for (int j=0 ; j<taille ; j++) {
+                    Case c = trouveCaseByCoord(i, j);        
+                    //on regarde si c'est une case vide qui n'est pas en bas à droite
+                    if(case_Vide.getVide() && case_Vide.getCoordx()!=this.taille-1 && case_Vide.getCoordy()!=this.taille-1){
+                        ordonne=false; 
+                    }
+                    //est-ce par ordre décroissant ?
+                    if (c.getBloc().getNumBloc() != temp_num_bloc+1){
                         ordonne = false;
                     }
-                    temp_num_bloc = num_bloc trouvé
+                    
+                    temp_num_bloc = c.getBloc().getNumBloc();
                 }
             }
         }
-        */
         
-        return false;
+        
+        return ordonne;
     }
     
     /*
