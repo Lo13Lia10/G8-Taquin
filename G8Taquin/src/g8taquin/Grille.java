@@ -37,22 +37,26 @@ public class Grille {
                     vide = true;
                 }
                 //Tirage au sort du num du bloc
-                Iterator it = ensNumBloc.iterator();
-               
-                while (it.hasNext()){
-                    //Copie du numéro courant                    
-                    int num = (int) it.next();
-                    System.out.println(num);
-                    //Création de la case
-                    ensCase[i][j] = new Case (i, j, vide, num);
-//                    if((int) it.next()==num){
-//                        this.ensNumBloc.remove(num);
-//                    }
-                    
-                    
+                int cmpt = aleatoire(taille);
+                System.out.println("cmpt" + cmpt);
+                int num=1;
+                
+                for (int n = 0; n<cmpt;n++){
+                    Iterator it = ensNumBloc.iterator();                    
+                    num = (int) it.next();
+                    System.out.println("");
                 }
+                this.ensNumBloc.remove(num);
+                System.out.println(num);
+                ensCase[i][j] = new Case (i, j, vide, num);
             }
         }
+    }
+    
+    public int aleatoire(int taille){
+        int max = (taille*taille)-1;
+        return (int)(Math.random() * (max-1)) + 1;
+        
     }
     
     public void setTaille (int newTaille) {
