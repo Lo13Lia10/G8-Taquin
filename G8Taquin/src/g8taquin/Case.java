@@ -28,7 +28,7 @@ public class Case {
 
     //renvoie l'attribut x 
     public int getCoordx(){    
-       return this.x; 
+       return (int) this.x; 
     }
     
     //renvoie l'attribut y
