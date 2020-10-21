@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -58,6 +59,7 @@ public class Grille {
                 
             }
         }
+        
     }
     
     public int aleatoire(int taille){
@@ -99,6 +101,10 @@ public class Grille {
         int  tempy = num_bloc_y;   // du bloc qui va être déplacé 
         int videx= caseVide.getCoordx(); 
         int videy= caseVide.getCoordy(); 
+        System.out.println("casepasvidex"+tempx);
+        System.out.println("casepasvidey"+tempy);
+        System.out.println("casevidex"+caseVide.getCoordx());
+        System.out.println("casevidey"+caseVide.getCoordy());
         
         Case caseAdep = trouveCaseByCoord(num_bloc_x,num_bloc_y); 
         
@@ -106,6 +112,7 @@ public class Grille {
         //Le bloc prend de nouvelles coordonnées
         //Déplacement vers la gauche
         if (d =='q') {
+            
             caseAdep.setCoordx(videx);
             caseAdep.setCoordy(videy); 
             caseVide.setCoordx(num_bloc_x);
@@ -116,6 +123,7 @@ public class Grille {
         }
         //Déplacement vers le bas
         else if (d=='s') {
+            
             caseAdep.setCoordx(videx);
             caseAdep.setCoordy(videy); 
             caseVide.setCoordx(num_bloc_x);
@@ -131,7 +139,7 @@ public class Grille {
             
         }
         //Déplacement vers le haut
-        else if (d=='z') {
+       else if (d=='z') {
             caseAdep.setCoordx(videx);
             caseAdep.setCoordy(videy); 
             caseVide.setCoordx(num_bloc_x);
@@ -168,7 +176,7 @@ public class Grille {
     protected boolean deplacement (char direction){
     //permet le déplacement d'une case dans la direction souhaitée si c'est possible
         //Récupération des coordonnées de la case vide
-        Case caseVide = trouveCaseVide();
+        Case caseVide = (Case) trouveCaseVide();
         int casevide_x = caseVide.getCoordx();
         int casevide_y = caseVide.getCoordy();
         
@@ -184,21 +192,21 @@ public class Grille {
             //le bloc prend y-1, x+0
             //this.getNumBlocByCoord(casevide_x, casevide_y-1);
             num_bloc_x = casevide_x;
-            num_bloc_y = casevide_y-1;
+            num_bloc_y = casevide_y+1;
         }
         //Déplacement vers le bas
         else if (direction=='s' && casevide_x!=0) {
             //le bloc prend y+0, x+1
             //this.getNumBlocByCoord(casevide_x+1, casevide_y);
-            num_bloc_x = casevide_x+1;
+            num_bloc_x = casevide_x-1;
             num_bloc_y = casevide_y;
         }
         //Déplacement vers la droite
         else if (direction=='d' && casevide_y!=0) {
             //le bloc prend y+1, x+0
             //this.getNumBlocByCoord(casevide_x, casevide_y+1);
-            num_bloc_x = casevide_x;
-            num_bloc_y = casevide_y+1;
+            num_bloc_x = casevide_x-1;
+            num_bloc_y = casevide_y;
         }
         //Déplacement vers le haut
         else if (direction=='z' && casevide_x!=taille-1) {
@@ -256,16 +264,20 @@ public class Grille {
     private Case trouveCaseVide() {
         Case c = null;
         //Parcours de l'ensemble des cases
-        for (int i=0 ; i==taille ; i++){
-            for (int j=0 ; j==taille ; j++){
+        for (int i=0 ; i<taille ; i++){
+            for (int j=0 ; j<taille ; j++){
                 //Si la case est vide on la récupère
                 if (this.ensCase[i][j].getVide()){
                     c = this.ensCase[i][j];
                 }
             }
         }
+        System.out.println("c"+c.toString());
+        System.out.println("ceg"+c.getCoordx());
+         System.out.println("ceg"+c.getCoordy());
         //Renvoie la case vide
-        return c;
+        return (Case) c;
+      
     }
     
     /*
@@ -317,6 +329,13 @@ public class Grille {
     public static void main(String[] args) {
         Grille g = new Grille(3);        
         System.out.println(g);
-        
+        Scanner sc = new Scanner(System.in);  //Initialisation du scanner
+        System.out.println("saisie une lettre");
+        char d = sc.next().charAt(0);
+         System.out.println("c = "+d); //Saisie par le joueur
+        //Test si la saisie est valide
+         g.deplacement(d); 
+        g.toString(); 
+        System.out.println(g);
     }
 }
