@@ -58,6 +58,10 @@ public class Case {
         this.vide=v;
     }
     
+    public void setBloc(Bloc newBloc){
+        this.b=newBloc;
+    }
+    
     public Bloc getBloc(){
         return this.b;
     }

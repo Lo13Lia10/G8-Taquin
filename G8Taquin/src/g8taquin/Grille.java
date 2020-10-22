@@ -33,6 +33,7 @@ public class Grille {
         System.out.println(this.listeBloc);
         int num = 0;
         
+        
         //Création du tableau de Cases
         
         for (int i=0 ; i<this.taille ; i++){
@@ -106,50 +107,20 @@ public class Grille {
         System.out.println("casevidex"+caseVide.getCoordx());
         System.out.println("casevidey"+caseVide.getCoordy());
         
-        Case caseAdep = trouveCaseByCoord(num_bloc_x,num_bloc_y); 
+        Case caseAdep = trouveCaseByCoord(tempx,tempy);
+        System.out.println(caseAdep);
+      
         
+        Bloc tempB = caseAdep.getBloc();
+       
         
         //Le bloc prend de nouvelles coordonnées
-        //Déplacement vers la gauche
-        if (d =='q') {
-            
-            caseAdep.setCoordx(videx);
-            caseAdep.setCoordy(videy); 
-            caseVide.setCoordx(num_bloc_x);
-            caseVide.setCoordy(num_bloc_y);
-         
-            //le bloc prend coordy - 1, coordx inchangée
+          
+        caseAdep.setBloc(null);
+        caseAdep.setVide(true); 
+        caseVide.setBloc(tempB);
+        caseVide.setVide(false);
         
-        }
-        //Déplacement vers le bas
-        else if (d=='s') {
-            
-            caseAdep.setCoordx(videx);
-            caseAdep.setCoordy(videy); 
-            caseVide.setCoordx(num_bloc_x);
-            caseVide.setCoordy(num_bloc_y);
-            
-        }
-        //Déplacement vers la droite
-        else if (d=='d') {
-            caseAdep.setCoordx(videx);
-            caseAdep.setCoordy(videy); 
-            caseVide.setCoordx(num_bloc_x);
-            caseVide.setCoordy(num_bloc_y);
-            
-        }
-        //Déplacement vers le haut
-       else if (d=='z') {
-            caseAdep.setCoordx(videx);
-            caseAdep.setCoordy(videy); 
-            caseVide.setCoordx(num_bloc_x);
-            caseVide.setCoordy(num_bloc_y);
-            
-        }
-        
-        //On met la bonne case à VIDE
-        caseAdep.setVide(true); //elle est vide
-        caseVide.setVide(false); //elle n'est plus vide
         
         /*
         on prend la case avec les coordonnées initial du bloc qu'on a déplacé
@@ -162,8 +133,8 @@ public class Grille {
     private Case trouveCaseByCoord(int x, int y ){
         Case c = null;
         //Parcours de l'ensemble des cases
-        for (int i=0 ; i==taille ; i++){
-            for (int j=0 ; j==taille ; j++){
+        for (int i=0 ; i<taille ; i++){
+            for (int j=0 ; j<taille ; j++){
                 //Si la case a les coord passé en paramètre 
                 if (this.ensCase[i][j].getCoordx()==x && this.ensCase[i][j].getCoordy()==y){
                     c = this.ensCase[i][j];
@@ -205,11 +176,11 @@ public class Grille {
         else if (direction=='d' && casevide_y!=0) {
             //le bloc prend y+1, x+0
             //this.getNumBlocByCoord(casevide_x, casevide_y+1);
-            num_bloc_x = casevide_x-1;
-            num_bloc_y = casevide_y;
+            num_bloc_x = casevide_x;
+            num_bloc_y = casevide_y-1;
         }
         //Déplacement vers le haut
-        else if (direction=='z' && casevide_x!=taille-1) {
+        else if (direction=='z' && casevide_x!=0) {
             //le bloc prend y+0, x-1
             //this.getNumBlocByCoord(casevide_x-1, casevide_y);
             num_bloc_x = casevide_x-1;
@@ -330,12 +301,16 @@ public class Grille {
         Grille g = new Grille(3);        
         System.out.println(g);
         Scanner sc = new Scanner(System.in);  //Initialisation du scanner
-        System.out.println("saisie une lettre");
-        char d = sc.next().charAt(0);
-         System.out.println("c = "+d); //Saisie par le joueur
-        //Test si la saisie est valide
-         g.deplacement(d); 
-        g.toString(); 
-        System.out.println(g);
+        for(int i=0;i<10;i++){   
+            System.out.println("saisie une lettre");
+            char d = sc.next().charAt(0);
+             System.out.println("c = "+d); //Saisie par le joueur
+            //Test si la saisie est valide
+             g.deplacement(d); 
+            g.toString(); 
+            System.out.println(g); 
+        }
+        
+        
     }
 }
